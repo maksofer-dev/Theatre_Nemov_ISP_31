@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Theatre_Nemov_ISP_31", "Theatre_Nemov_ISP_31.csproj", "{B099630F-6335-46B2-B319-860FE5191016}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B099630F-6335-46B2-B319-860FE5191016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B099630F-6335-46B2-B319-860FE5191016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B099630F-6335-46B2-B319-860FE5191016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B099630F-6335-46B2-B319-860FE5191016}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FF37D279-A82A-48C2-8625-25DF8929B36E}
+	EndGlobalSection
+EndGlobal

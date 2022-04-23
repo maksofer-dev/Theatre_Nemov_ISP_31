@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TheatreBD" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActorIMG" Type="varchar" MaxLength="255" />
+          <Property Name="FullName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WorkExp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AwardsOrTitles" Type="varchar" MaxLength="50" />
+          <Property Name="Education" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idActor" Type="int" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="dateOfStart" Type="date" Nullable="false" />
+          <Property Name="dateOfEnd" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Spectacle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameOfSpectacle" Type="varchar" MaxLength="50" />
+          <Property Name="Budget" Type="money" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="ActorID" Type="int" Nullable="false" />
+          <Property Name="Time" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="26" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="26" Nullable="false" />
+          <Property Name="TypeOfUser" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_Contracts_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="idActor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spectacle_Actors">
+          <End Role="Actors" Type="Self.Actors" Multiplicity="1" />
+          <End Role="Spectacle" Type="Self.Spectacle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Spectacle">
+              <PropertyRef Name="ActorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spectacle_Genres">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="1" />
+          <End Role="Spectacle" Type="Self.Spectacle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Spectacle">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TheatreBDContainer">
+          <EntitySet Name="Actors" EntityType="Self.Actors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Spectacle" EntityType="Self.Spectacle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contracts_Actors" Association="Self.FK_Contracts_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spectacle_Actors" Association="Self.FK_Spectacle_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Spectacle" EntitySet="Spectacle" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spectacle_Genres" Association="Self.FK_Spectacle_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Spectacle" EntitySet="Spectacle" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TheatreBD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Actor">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActorIMG" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkExp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AwardsOrTitles" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Education" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK_Contracts_Actors" FromRole="Actors" ToRole="Contracts" />
+          <NavigationProperty Name="Spectacles" Relationship="Self.FK_Spectacle_Actors" FromRole="Actors" ToRole="Spectacle" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idActor" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="dateOfStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dateOfEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Actor" Relationship="Self.FK_Contracts_Actors" FromRole="Contracts" ToRole="Actors" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Spectacles" Relationship="Self.FK_Spectacle_Genres" FromRole="Genres" ToRole="Spectacle" />
+        </EntityType>
+        <EntityType Name="Spectacle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameOfSpectacle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Budget" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="ActorID" Type="Int32" Nullable="false" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Actor" Relationship="Self.FK_Spectacle_Actors" FromRole="Spectacle" ToRole="Actors" />
+          <NavigationProperty Name="Genre" Relationship="Self.FK_Spectacle_Genres" FromRole="Spectacle" ToRole="Genres" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="26" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TypeOfUser" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Contracts_Actors">
+          <End Role="Actors" Type="Self.Actor" Multiplicity="0..1" />
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="idActor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spectacle_Actors">
+          <End Role="Actors" Type="Self.Actor" Multiplicity="1" />
+          <End Role="Spectacle" Type="Self.Spectacle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Actors">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Spectacle">
+              <PropertyRef Name="ActorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Spectacle_Genres">
+          <End Role="Genres" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Spectacle" Type="Self.Spectacle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Spectacle">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TheatreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Actors" EntityType="Self.Actor" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Spectacles" EntityType="Self.Spectacle" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Contracts_Actors" Association="Self.FK_Contracts_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spectacle_Actors" Association="Self.FK_Spectacle_Actors">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Spectacle" EntitySet="Spectacles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Spectacle_Genres" Association="Self.FK_Spectacle_Genres">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Spectacle" EntitySet="Spectacles" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TheatreBDContainer" CdmEntityContainer="TheatreEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="TheatreBD.Actor">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ActorIMG" ColumnName="ActorIMG" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="WorkExp" ColumnName="WorkExp" />
+                <ScalarProperty Name="AwardsOrTitles" ColumnName="AwardsOrTitles" />
+                <ScalarProperty Name="Education" ColumnName="Education" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="TheatreBD.Contract">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idActor" ColumnName="idActor" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="dateOfStart" ColumnName="dateOfStart" />
+                <ScalarProperty Name="dateOfEnd" ColumnName="dateOfEnd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="TheatreBD.Genre">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Spectacles">
+            <EntityTypeMapping TypeName="TheatreBD.Spectacle">
+              <MappingFragment StoreEntitySet="Spectacle">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="NameOfSpectacle" ColumnName="NameOfSpectacle" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="ActorID" ColumnName="ActorID" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="TheatreBD.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TheatreBD.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="TypeOfUser" ColumnName="TypeOfUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
