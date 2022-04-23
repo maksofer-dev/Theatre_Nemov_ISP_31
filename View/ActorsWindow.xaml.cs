@@ -50,8 +50,23 @@ namespace Theatre_Nemov_ISP_31.View
 
         private void delBtn_Click(object sender, RoutedEventArgs e)
         {
-            AddActorWindow addActorWindow = new AddActorWindow(null);
-            addActorWindow.Show();
+            var actorsForRemoving = dGridActors.SelectedItems.Cast<Actor>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {actorsForRemoving.Count()} элементов?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    TheatreEntities.GetContext().Actors.RemoveRange(actorsForRemoving);
+                    TheatreEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены!");
+                    dGridActors.ItemsSource = TheatreEntities.GetContext().Actors.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
         }
 
         private void refreshBtn_Click(object sender, RoutedEventArgs e)

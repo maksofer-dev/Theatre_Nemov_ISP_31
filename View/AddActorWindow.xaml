@@ -6,41 +6,60 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Theatre_Nemov_ISP_31.View"
         mc:Ignorable="d"
-        Title="AddActorWindow" Height="400" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True" >
+        Title="AddActorWindow" Height="550" Width="500" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True" >
     <Border Background="White" >
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
-                <RowDefinition/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="143*"/>
+
 
             </Grid.RowDefinitions>
-            <TextBlock Text="ФИО: " Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="24" Margin="75,60,0,0" Width="49" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-            <TextBox x:Name="fioBox" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Margin="125,55,0,0" Width="300"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="25*"/>
+                <ColumnDefinition Width="53*"/>
 
-            <Border x:Name="addActorBorder" Grid.ColumnSpan="3" Grid.Row="0" MouseLeftButtonDown="addActorBorder_MouseLeftButtonDown_1" >
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="ФИО: " Grid.Row="2"  HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,5,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+
+            <Border x:Name="addActorBorder" Grid.Row="0" Grid.ColumnSpan="3" MouseLeftButtonDown="addActorBorder_MouseLeftButtonDown_1" >
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="Silver" Offset="1"/>
                         <GradientStop Color="Black" Offset="0"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <materialDesign:PackIcon Kind="Person" Foreground="White" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="Theatre" Foreground="White" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             </Border>
-            <Grid Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition/>
+            <TextBox Text="{Binding FullName}" x:Name="addEmployeeWindow1" Grid.Row="2" VerticalAlignment="Center" FontSize="15" Height="30" Margin="0,0,0,0" Width="AUTO" Foreground="Black" Cursor="Arrow" Grid.Column="1" TextAlignment="Center" />
 
-                </Grid.RowDefinitions>
-                <TextBox Text="{Binding FullName}" x:Name="addEmployeeWindow1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Margin="125,55,0,0" Width="290" Foreground="#FF22335E" Cursor="Arrow"/>
+            <TextBlock Text="Стаж: " Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
 
-                <TextBlock Text="Стаж: " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="111,141,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-
-                <TextBlock Text="Образование: " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="53,100,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-                <TextBox Text="{Binding Education}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="250" Margin="165,90,0,0" Foreground="#FF22335E"/>
+            <TextBlock Text="Образование: " Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="17" Margin="0,0,0,0" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+            <TextBox Text="{Binding Education}" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Margin="0,0,0,0" Foreground="Black" Grid.Column="1" TextAlignment="Center"/>
 
 
+            
+            <TextBox Text="{Binding WorkExp}" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Margin="0,0,0,0" Foreground="Black" Grid.Column="1" TextAlignment="Center" />
+            <TextBlock Text="Награды/звания(если есть):" Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,0,5" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" TextWrapping="Wrap" TextAlignment="Right"/>
+            <TextBox Text="{Binding AwardsOrTitles}" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Foreground="Black" Grid.Column="1" Grid.ColumnSpan="1" TextAlignment="Center"/>
+            <Grid Grid.Row="6" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="298"/>
+
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <Button x:Name="clipImageBN" Content="Прикрепить фото" Click="addImaage_Click" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Cursor="Hand" Grid.Row="6" Margin="0,0,0,0" Background="White" Grid.Column="1" VerticalAlignment="Top" Height="32"/>
                 <Button x:Name="saveBtn" 
                 Content="Сохранить"
                 HorizontalAlignment="Left"
@@ -51,7 +70,7 @@
                 Foreground="Black"
                 BorderBrush="Black"
                 Click="saveBtn_Click"
-                    Grid.Row="1" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="100,0,0,30">
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="0,0,0,10" Grid.Column="1">
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="20"/>
@@ -68,18 +87,17 @@
                 Foreground="Black"
                 BorderBrush="Black"
                 Click="cancelBtn_Click"
-                    Grid.Row="1" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="0,0,100,30">
+                    Grid.Row="6" Cursor="Hand" FontFamily="Proxima Nova Rg" Grid.Column="1" Margin="0,0,0,10" >
                     <Button.Resources>
                         <Style TargetType="{x:Type Border}">
                             <Setter Property="CornerRadius" Value="20"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                <TextBox Text="{Binding WorkExp}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="250" Margin="165,130,0,0" Foreground="#FF22335E"/>
-                <Button x:Name="clipImageBN" Content="Прикрепить фото" Click="addImaage_Click" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Cursor="Hand" Grid.Row="1" Width="150" Margin="0,130,0,0" Background="White" />
-                <TextBlock Text="Награды/звания:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="36,180,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-                <TextBox Text="{Binding AwardsOrTitles}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="250" Margin="165,170,0,0" Foreground="#FF22335E"/>
+                <Image x:Name="imgActor" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="115" Height="155" Margin="0,0,0,20" Stretch="Fill"/>
+
             </Grid>
+
         </Grid>
     </Border>
 </Window>

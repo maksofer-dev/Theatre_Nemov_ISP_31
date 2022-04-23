@@ -26,8 +26,15 @@ namespace Theatre_Nemov_ISP_31.View
         {
             InitializeComponent();
             if (selectedActor != null)
+            {
                 actor = selectedActor;
+                imgActor.Source = new BitmapImage(new Uri(actor.ActorIMG));
+
+            }
             
+
+
+
 
             DataContext = actor;
         }
@@ -82,7 +89,10 @@ namespace Theatre_Nemov_ISP_31.View
 
             if (openDialog.ShowDialog() == true)
             {
+
                 actor.ActorIMG = openDialog.FileName;
+                imgActor.Source = new BitmapImage(new Uri(actor.ActorIMG));
+
             }
         }
     }

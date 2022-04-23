@@ -54,7 +54,7 @@
 
                     <TextBlock TextWrapping="Wrap"
                        Text="Пожалуйста, введите свой логин и пароль."
-                       FontSize="20" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" TextAlignment="Center" Foreground="Black" FontFamily="Proxima Nova Rg"/>
+                       FontSize="20" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="280" TextAlignment="Center" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
 
                 </StackPanel>
                 <Grid Margin="0,0,0,0">

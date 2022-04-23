@@ -61,5 +61,26 @@ namespace Theatre_Nemov_ISP_31.View
             TheatreEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
             dGridSpectacles.ItemsSource = TheatreEntities.GetContext().Spectacles.ToList();
         }
+
+        private void delBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var spectacleForRemoving = dGridSpectacles.SelectedItems.Cast<Spectacle>().ToList();
+            if (MessageBox.Show($"Вы точно хотите удалить следующие {spectacleForRemoving.Count()} элементов?", "Внимание",
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    TheatreEntities.GetContext().Spectacles.RemoveRange(spectacleForRemoving);
+                    TheatreEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Данные удалены!");
+                    dGridSpectacles.ItemsSource = TheatreEntities.GetContext().Spectacles.ToList();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+        }
     }
 }

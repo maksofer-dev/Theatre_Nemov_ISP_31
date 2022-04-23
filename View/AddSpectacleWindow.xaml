@@ -7,20 +7,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Theatre_Nemov_ISP_31.View"
         mc:Ignorable="d"
-        Title="AddSpectacleWindow" Height="500" Width="500"  >
+        Title="AddSpectacleWindow" Height="500" Width="400" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="Transparent" AllowsTransparency="True">
 
     <Border Background="White" >
-        <Grid>
+        <Grid VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
-                <RowDefinition/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="70"/>
+
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="45"/>
+
+                <RowDefinition Height="143*"/>
+
 
             </Grid.RowDefinitions>
-            <ComboBox SelectedItem="{Binding Actor.FullName}" x:Name="actorComboBox" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Margin="125,55,0,0" Width="290" Foreground="#FF22335E" Cursor="Arrow"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="15*"/>
+                <ColumnDefinition Width="53*"/>
 
-            <TextBlock Text="Название: " Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="24" Margin="67,225,0,0" Width="Auto" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Vertical">
+                <TextBlock Text="Бюджет: "  Grid.Row="4" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold"/>
+                <TextBox Text="{Binding Budget}" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="15" Height="30" Foreground="Black" Grid.Column="1" Width="100" HorizontalContentAlignment="Center" Cursor="Arrow"/>
+            </StackPanel>
+            <ComboBox SelectedItem="{Binding Actor}" x:Name="actorComboBox" Grid.Row="2" DisplayMemberPath="FullName" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15" Margin="0,0,0,0" Foreground="Black" Cursor="Arrow" Grid.Column="1" Height="30" HorizontalContentAlignment="Center"/>
 
-            <TextBlock Text="Актер: " Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="24" Margin="75,60,0,0" Width="49" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
+            <TextBlock Text="Название: " Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="17" Height="24" Width="Auto" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Grid.Column="1"/>
+
+            <TextBlock Text="Актер: " Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="17" Height="24" Margin="0,0,0,0" Width="49" Foreground="Black" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Grid.Column="1"/>
 
             <Border x:Name="addSpectacleBorder" Grid.ColumnSpan="3" Grid.Row="0" MouseLeftButtonDown="addSpectacleBorder_MouseLeftButtonDown" >
                 <Border.Background>
@@ -29,60 +48,62 @@
                         <GradientStop Color="Black" Offset="0"/>
                     </LinearGradientBrush>
                 </Border.Background>
-                <materialDesign:PackIcon Kind="Person" Foreground="White" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <materialDesign:PackIcon Kind="Theater" Foreground="White" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             </Border>
-            <Grid Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="70"/>
-                    <RowDefinition/>
+            <TextBox Text="{Binding NameOfSpectacle}" x:Name="actorBox" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Center" FontSize="15" Height="30" Foreground="Black" Cursor="Arrow" Grid.Column="1" HorizontalContentAlignment="Center" />
+            <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="Жанр:" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Margin="0,0,0,0"/>
 
-                </Grid.RowDefinitions>
-                <TextBox Text="{Binding NameOfSpectacle}" x:Name="actorBox" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Margin="140,219,0,0" Width="290" Foreground="#FF22335E" Cursor="Arrow"/>
+                <ComboBox x:Name="genreComboBox" SelectedItem="{Binding Genre}" DisplayMemberPath="Name" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15" Foreground="Black" Grid.Column="1" HorizontalContentAlignment="Center" Width="150" Height="30"/>
+            </StackPanel>
 
-                <TextBlock Text="Бюджет: " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="95,140,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
 
-                <TextBlock Text="Дата: " Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="178,105,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-                <DatePicker SelectedDate="{Binding Time}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="120" Margin="225,94,0,0" Foreground="#FF22335E" SelectedDateFormat="Long"/>
 
-                <Button x:Name="saveBtn" 
+
+            <StackPanel Grid.Row="4" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+
+            </StackPanel>
+
+            <DatePicker x:Name="datePicker" Grid.Row="5"  VerticalAlignment="Center" SelectedDate="{Binding Time}" Width="150" FontSize="17" SelectedDateFormat="Long" SelectedDateChanged="datePicker_SelectedDateChanged" HorizontalAlignment="Center" materialDesign:HintAssist.Hint="Дата" HorizontalContentAlignment="Center" Margin="0,0,0,0" Grid.Column="1" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Foreground="Black"/>
+
+            <materialDesign:TimePicker x:Name="timePicker" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Height="31" FontSize="17" HorizontalAlignment="Center" Width="100" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" materialDesign:HintAssist.Hint="Время" Margin="0,0,0,0" Padding="0,0,0,0" FontFamily="/Theatre_Nemov_ISP_31;component/Fonts/#Gilroy Bold" Foreground="Black"/>
+
+            <Button x:Name="saveBtn" 
                 Content="Сохранить"
                 HorizontalAlignment="Left"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 Width="118"
                 Height="42"
                 Background="White"
                 Foreground="Black"
                 BorderBrush="Black"
                 Click="saveBtn_Click"
-                    Grid.Row="1" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="100,0,0,30">
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="20"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <Button x:Name="cancelBtn" 
+                    Grid.Row="7" Cursor="Hand" FontFamily="Proxima Nova Rg" Grid.Column="1" Margin="0,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button x:Name="cancelBtn" 
                 Content="Отмена"
                 HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
+                VerticalAlignment="Center"
                 Width="118"
                 Height="42"
                 Background="White"
                 Foreground="Black"
                 BorderBrush="Black"
                 Click="cancelBtn_Click"
-                    Grid.Row="1" Cursor="Hand" FontFamily="Proxima Nova Rg" Margin="0,0,100,30">
-                    <Button.Resources>
-                        <Style TargetType="{x:Type Border}">
-                            <Setter Property="CornerRadius" Value="20"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-                <TextBox Text="{Binding Budget}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="250" Margin="165,130,0,0" Foreground="#FF22335E"/>
-                <TextBlock Text="Жанр:" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Margin="111,184,0,0" Foreground="#FF22335E" FontFamily="/IS_EmployeesAccounting;component/Fonts/#Gilroy Bold"/>
-                <ComboBox x:Name="genreComboBox" SelectedItem="{Binding Genre}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="15" Height="30" Width="250" Margin="165,170,0,0" Foreground="#FF22335E"/>
-            </Grid>
+                    Grid.Row="7" Cursor="Hand" FontFamily="Proxima Nova Rg" Grid.Column="1" Margin="0,0,0,0">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
         </Grid>
     </Border>
 </Window>

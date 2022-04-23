@@ -48,9 +48,15 @@ namespace Theatre_Nemov_ISP_31.View
         {
             StringBuilder errors = new StringBuilder();
             if (string.IsNullOrWhiteSpace(spectacle.NameOfSpectacle))
-                errors.AppendLine("Укажите ФИО");
-            if (spectacle.GenreID == null)
-                errors.AppendLine("Укажите образование");
+                errors.AppendLine("Укажите название спектакля");
+            if (spectacle.Genre == null)
+                errors.AppendLine("Укажите Жанр");
+            if (spectacle.Actor == null)
+                errors.AppendLine("Укажите актера");
+            if (spectacle.Budget == null)
+                errors.AppendLine("Укажите бюджет");
+            if (spectacle.Time == null)
+                errors.AppendLine("Укажите название спектакля");
 
             if (errors.Length > 0)
             {
@@ -71,6 +77,17 @@ namespace Theatre_Nemov_ISP_31.View
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void datePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(timePicker.SelectedTime != null)
+            {
+                string t = timePicker.Text.ToString();
+                string d = datePicker.Text;
+                DateTime dt = DateTime.Parse(d +" "+ t);
+                spectacle.Time = dt;
             }
         }
     }
